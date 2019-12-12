@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.disparent.mallparent.dao.ProductMapper">
+    <!-- 查询所有商品信息，返回商品集合 -->
+    <!--
+    id对应interface的方法名
+    resultType对应封装类对象
+    ${ }：字符串替换
+    #{ }：占位符
+    #{ }比 ${ }更安全，#{ }可以防止 SQL 注入，所以更多使用的是#{ }。
+    -->
+    <select id="findAll" resultType="productEntity" parameterType="java.util.Map">
+        select id as "id",
+        name as "name",
+        image as "image",
+        business_id as "businessId" ,
+        price as "price",
+        mer_ratio as "merRatio",
+        refer_ratio as "referRatio",
+        introduce as "introduce" ,
+        is_effect as "isEffect"
+        from wx_tab_product
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name!=null and name !='' ">
+                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 查询单个商品信息 -->
+    <select id="findById" parameterType="java.lang.Integer" resultType="productEntity">
+        select id as "id",
+        name as "name",
+        image as "image",
+        business_id as "businessId" ,
+        price as "price",
+        mer_ratio as "merRatio",
+        refer_ratio as "referRatio",
+        introduce as "introduce" ,
+        is_effect as "isEffect"
+        from wx_tab_product
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <!-- 添加新商品 -->
+    <insert id="insert" parameterType="productEntity">
+
+       insert wx_tab_product(
+            name,
+            image,
+            business_id,
+            price,
+            mer_ratio,
+            refer_ratio,
+            introduce,
+            is_effect
+       ) values (
+            #{name,jdbcType=VARCHAR},
+            #{image,jdbcType=VARCHAR},
+            #{business_id,jdbcType=INTEGER},
+            #{price,jdbcType=DECIMAL},
+            #{mer_ratio,jdbcType=DECIMAL},
+            #{refer_ratio,jdbcType=DECIMAL},
+            #{introduce,jdbcType=CLOB},
+            #{is_effect,jdbcType=CHAR}
+       )
+
+    </insert>
+
+    <!-- 修改商品信息 -->
+    <update id="update" parameterType="productEntity">
+        update wx_tab_product
+        <set>
+            name = #{name,jdbcType=VARCHAR},
+            image = #{image,jdbcType=VARCHAR},
+            business_id = #{business_id,jdbcType=INTEGER},
+            price = #{price,jdbcType=DECIMAL},
+            mer_ratio = #{mer_ratio,jdbcType=DECIMAL},
+            refer_ratio = #{refer_ratio,jdbcType=DECIMAL},
+            introduce = #{introduce,jdbcType=CLOB},
+            is_effect = #{is_effect,jdbcType=CHAR}
+        </set>
+        where
+        <if test="id!=null and id!=''">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+    </update>
+
+    <!-- 删除单个商品信息
+    <delete id="deleteById" parameterType="java.lang.Integer" >
+        delete from wx_tab_product
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </delete>-->
+    <!-- 删除单个商品信息 -->
+    <update id="changeStatus" parameterType="java.util.Map">
+        update wx_tab_product
+        <set>
+            is_effect = #{status,jdbcType=CHAR}
+        </set>
+        <where>
+        <if test="id!=null and id!=''">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        </where>
+    </update>
+
+</mapper>

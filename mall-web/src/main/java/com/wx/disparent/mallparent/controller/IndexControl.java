@@ -14,12 +14,11 @@ import java.util.Map;
 @RequestMapping("/f")
 public class IndexControl {
     @RequestMapping("/ff")
-    public String geta() {
+    public String geta(){
         return "index";
     }
-
     @RequestMapping("/u")
-    public String getu() {
+    public String getu(){
         System.out.println(11);
         return "user/user";
     }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface UserMapper extends IBaseMapper<UserEntity>
-{
-    UserEntity findByUsername(String name ) ;
+public interface UserMapper extends IBaseMapper<UserEntity> {
+    UserEntity findByUsername(String name);
 }

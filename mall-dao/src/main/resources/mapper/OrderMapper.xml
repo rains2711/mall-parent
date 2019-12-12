@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.disparent.mallparent.dao.OrderMapper">
+
+    <select id="findAll" resultType="orderEntity" parameterType="java.util.Map">
+        select id as "id",
+        total_num as "totalNum",
+        pay_money as "payMoney",
+        pay_type as "payType" ,
+        create_time as "createTime",
+        update_time as "updateTime",
+        pay_time as "payTime",
+        consign_time as "consignTime" ,
+        end_time as "endTime",
+        close_time as "closeTime" ,
+        shipping_name as "shippingName",
+        shipping_code as "shippingCode",
+        username as "username",
+        receiver_contact as "receiverContact",
+        receiver_mobile as "receiverMobile",
+        receiver_address as "receiverAddress",
+        transaction_id as "transactionId",
+        order_status as "orderStatus",
+        pay_status as "payStatus",
+        consign_status as "consignStatus",
+        product_id as "productId",
+        is_delete as "isDelete"
+        from wx_tab_order
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <select id="findById" parameterType="java.lang.Integer" resultType="orderEntity">
+        select id as "id",
+        total_num as "totalNum",
+        pay_money as "payMoney",
+        pay_type as "payType" ,
+        create_time as "createTime",
+        update_time as "updateTime",
+        pay_time as "payTime",
+        consign_time as "consignTime" ,
+        end_time as "endTime",
+        close_time as "closeTime" ,
+        shipping_name as "shippingName",
+        shipping_code as "shippingCode",
+        username as "username",
+        receiver_contact as "receiverContact",
+        receiver_mobile as "receiverMobile",
+        receiver_address as "receiverAddress",
+        transaction_id as "transactionId",
+        order_status as "orderStatus",
+        pay_status as "payStatus",
+        consign_status as "consignStatus",
+        product_id as "productId",
+        is_delete as "isDelete"
+        from wx_tab_order
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="insert" parameterType="orderEntity">
+
+       insert wx_tab_order(
+            total_num,
+            pay_money,
+            pay_type,
+            create_time,
+            update_time,
+            pay_time,
+            consign_time,
+            end_time,
+            close_time,
+            shipping_name,
+            shipping_code,
+            username,
+            receiver_contact,
+            receiver_mobile,
+            receiver_address,
+            transaction_id,
+            order_status,
+            pay_status,
+            consign_status,
+            product_id,
+            is_delete
+       ) values (
+            #{totalNum,jdbcType=INTEGER},
+            #{payMoney,jdbcType=INTEGER},
+            #{payType,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{payTime,jdbcType=TIMESTAMP},
+            #{consignTime,jdbcType=TIMESTAMP} ,
+            #{endTime,jdbcType=TIMESTAMP},
+            #{closeTime,jdbcType=TIMESTAMP},
+            #{shippingName,jdbcType=VARCHAR},
+            #{shippingCode,jdbcType=VARCHAR},
+            #{username,jdbcType=VARCHAR},
+            #{receiverContact,jdbcType=VARCHAR},
+            #{receiverMobile,jdbcType=VARCHAR},
+            #{receiverAddress,jdbcType=VARCHAR},
+            #{transactionId,jdbcType=VARCHAR},
+            #{orderStatus,jdbcType=CHAR} ,
+            #{payStatus,jdbcType=CHAR},
+            #{consignStatus,jdbcType=CHAR},
+            #{productId,jdbcType=INTEGER},
+            #{isDelete,jdbcType=CHAR}
+       )
+
+    </insert>
+
+    <update id="update" parameterType="orderEntity">
+    update wx_tab_order set
+            total_num =#{totalNum}
+        <where>
+            <if test="id!=null and id!=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+</update>
+
+<delete id="deleteById" parameterType="int">
+    update wx_tab_order set
+    is_delete = 1
+    where id = #{id}
+</delete>
+
+
+</mapper>

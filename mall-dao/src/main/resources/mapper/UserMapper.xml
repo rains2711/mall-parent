@@ -48,7 +48,6 @@
 
 
     <insert id="insert" parameterType="userEntity" >
-
        insert wx_tab_user(
             acct_type,
             answer,
@@ -76,7 +75,6 @@
             #{userType,jdbcType=VARCHAR},
             #{username,jdbcType=VARCHAR}
        )
-
     </insert>
 
 
