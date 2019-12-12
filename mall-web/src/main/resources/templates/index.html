@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<script>
+    function aa() {
+        $.ajax({
+            url:"/d/d",
+            data:{id:document.getElementById("username").value},
+            type:"post",
+            dataType:"json",
+            success:function (e) {
+                // alert(e)
+               document.getElementById("tt").innerHTML=e.realName;
+                window.open("/f/u");
+            }
+        })
+    }
+
+</script>
+<body>
+
+<div><input type="text" id="username"><input type="button" value="提交" onclick="aa()"></div>
+<div id="tt"></div>
+</body>
+</html>

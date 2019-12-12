@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.disparent.mallparent.dao.UserMapper">
+
+        <select id="findAll" resultType="userEntity" parameterType="java.util.Map">
+         select acct_type  as "acctType",
+                answer   as "answer",
+                email    as "email",
+                id       as  "id" ,
+                last_login  as "lastLogin",
+                passwd       as "passwd",
+                phone        as "phone",
+                problem      as "problem" ,
+                real_name    as "realName",
+                rece_account as "receAccount" ,
+                refer_id     as "referId",
+                user_type    as "userType",
+                username     as "username" from wx_tab_user
+            <where>
+                <if test="id!=null and id!=''">
+                    and id = #{id,jdbcType=INTEGER}
+                </if>
+                <if test="name!=null and name !='' ">
+                    and  name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+                </if>
+            </where>
+      </select>
+        <select id="findById" parameterType="java.lang.Integer" resultType="userEntity">
+            select acct_type  as "acctType",
+            answer   as "answer",
+            email    as "email",
+            id       as  "id" ,
+            last_login  as "lastLogin",
+            passwd       as "passwd",
+            phone        as "phone",
+            problem      as "problem" ,
+            real_name    as "realName",
+            rece_account as "receAccount" ,
+            refer_id     as "referId",
+            user_type    as "userType",
+            username     as "username" from wx_tab_user
+            <where>
+                <if test="id!=null and id!=''">
+                    and id = #{id,jdbcType=INTEGER}
+                </if>
+            </where>
+        </select>
+
+
+    <insert id="insert" parameterType="userEntity" >
+
+       insert wx_tab_user(
+            acct_type,
+            answer,
+            email,
+            last_login,
+            passwd,
+            phone,
+            problem,
+            real_name,
+            rece_account,
+            refer_id,
+            user_type,
+            username
+       ) values (
+            #{acctType,jdbcType=VARCHAR},
+            #{answer,jdbcType=VARCHAR},
+            #{email",jdbcType=VARCHAR},
+            #{lastLogin,jdbcType=TIMESTAMP},
+            #{passwd,jdbcType=VARCHAR},
+            #{phone,jdbcType=VARCHAR},
+            #{problem,jdbcType=VARCHAR} ,
+            #{realName,jdbcType=VARCHAR},
+            #{receAccount,jdbcType=VARCHAR},
+            #{referId,jdbcType=INTEGER},
+            #{userType,jdbcType=VARCHAR},
+            #{username,jdbcType=VARCHAR}
+       )
+
+    </insert>
+
+
+
+
+
+
+
+
+
+
+</mapper>
